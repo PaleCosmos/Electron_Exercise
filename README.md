@@ -1,4 +1,4 @@
-# bidding2admin
+# Electron Excample
 
 ## Project setup
 ```
