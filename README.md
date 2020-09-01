@@ -1,4 +1,4 @@
-# Electron Excample
+# Electron Exercise
 
 ## Project setup
 ```
