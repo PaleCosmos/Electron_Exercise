@@ -19,6 +19,10 @@ module.exports = {
     'no-trailing-spaces':'off',
     'key-spacing':'off',
     'key-quote-props':'off',
-    'padded-blocks':'off',
+    'padded-blocks':'off', 
+    'spaced-comment':'off',
+    'quotes':'off',
+    'arrow-spacing':'off',
+    'block-spacing':'off',
   }
 }

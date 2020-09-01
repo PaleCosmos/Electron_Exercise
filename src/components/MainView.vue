@@ -9,28 +9,28 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <editor v-model="content" v-if="editMode"></editor>
-        <viewer :value="content" v-else></viewer>
+        <v-textarea 
+        ref="tuiEditor"
+        initialEditType="wysiwyg"
+        v-model ="editorText"
+        :readonly="editMode"/>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="read">read</v-btn>
         <v-btn @click="write">write</v-btn>
+          <v-btn >x</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import 'tui-editor/dist/tui-editor.css'
-import 'tui-editor/dist/tui-editor-contents.css'
-import 'codemirror/lib/codemirror.css'
 const require = window.require
-const { Editor, Viewer } = require('@toast-ui/vue-editor')
 const fs = require('fs')
 const { dialog } = require('electron').remote
 
-const options = {
+const dialogOptions = {
   filters: [
     {
       name: 'text and markdown',
@@ -41,28 +41,35 @@ const options = {
 
 export default {
   components: {
-    editor: Editor,
-    viewer: Viewer
   },
   data () {
     return {
       editMode: true,
-      content: null
+      editorText: '',
+      height: '100%'
     }
   },
   methods: {
     read () {
-      const file = dialog.showOpenDialogSync(options)
-      if (!file) return
+      const file = dialog.showOpenDialogSync(dialogOptions)
+
+      if (!file) {
+        console.log('nofile [read]')
+        return
+      }
       
-      this.content = fs.readFileSync(file[0]).toString()
-      console.log(this.content)
+      this.editorText = fs.readFileSync(file[0]).toString()
+      console.log(this.editorText)
     },
     write () {
-      const file = dialog.showSaveDialogSync(options)
-      if (!file) return
-      console.log(this.content)
-      fs.writeFileSync(file, this.content)
+      const file = dialog.showSaveDialogSync(dialogOptions)
+
+      if (!file) {
+        console.log('nofile [write]')
+        return
+      }
+      console.log(this.editorText)
+      fs.writeFileSync(file, this.editorText)
     }
   }
 }
