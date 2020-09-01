@@ -14,8 +14,12 @@
   "main": "background.js",
   "dependencies": {
     "@mdi/font": "^3.6.95",
+    "@toast-ui/vue-editor": "^2.3.1",
+    "codemirror": "^5.57.0",
     "core-js": "^3.6.5",
+    "fs": "^0.0.1-security",
     "roboto-fontface": "*",
+    "tui-editor": "^1.4.10",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
